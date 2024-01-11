@@ -3,7 +3,7 @@ import java.util.Arrays;
 public class StringOps {
 
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(allIndexOf("MMMM",'M')));
+        System.out.println(camelCase(" tWo   wordS"));
         
     }
 
@@ -42,8 +42,27 @@ public class StringOps {
         } else if (NewWord.charAt(0) >= 97 && NewWord.charAt(0) <=122){
             camelCase += NewWord.charAt(0);
         }
-
+        boolean FirstLetter = false;
         while (j < NewWord.length()) {
+            char ch = NewWord.charAt(j);
+            if (ch == ' ') {
+                FirstLetter = true;
+            }
+            else {
+                if ((NewWord.charAt(j) >= 'a' && NewWord.charAt(j) <= 'z') && FirstLetter == false){
+                    camelCase = camelCase + (char) (NewWord.charAt(j));
+                } else if ((NewWord.charAt(j) >= 'A' && NewWord.charAt(j) <= 'Z') && FirstLetter == true){
+                    camelCase = camelCase + (char) (NewWord.charAt(j));
+                
+                } else if ((NewWord.charAt(j) >= 'A' && NewWord.charAt(j) <= 'Z') && FirstLetter == false){
+                    camelCase = camelCase + (char) (NewWord.charAt(j) + 32);
+                } else if ((NewWord.charAt(j) >= 'a' && NewWord.charAt(j) <= 'z') && FirstLetter == true){
+                    camelCase = camelCase + (char) (NewWord.charAt(j) - 32);
+                }
+                FirstLetter = false;
+        }
+        j++;
+        /*while (j < NewWord.length()) {
             char ch = NewWord.charAt(j);
             if ((ch == ' ') && (j != NewWord.length() - 1)) {
                 if (NewWord.charAt(j + 1) >= 97 && NewWord.charAt(j + 1) <= 122){
@@ -59,8 +78,7 @@ public class StringOps {
                 } else{
                     camelCase = camelCase + NewWord.charAt(j);
                 }
-            }
-            j++;
+            }*/          
         }
         return camelCase;
     }
